@@ -4,27 +4,25 @@
 #include <stddef.h>
 
 // Константы структуры данных
-#define LIST_CAPACITY 32      // Максимальная вместимость статического массива
-#define MAX_KEY_LEN 64        // Максимальная длина строкового ключа
-#define NIL -1                // Индекс, обозначающий отсутствие связи (аналог NULL)
+#define LIST_CAPACITY 32 // Максимальная вместимость статического массива
+#define MAX_KEY_LEN 64   // Максимальная длина строкового ключа
+#define NIL -1           // Индекс, обозначающий отсутствие связи
 
 // Узел списка в статическом массиве
 typedef struct {
-    char key[MAX_KEY_LEN]; // Ключ элемента (строковый)
-    char value;            // Значение элемента (символ)
-    int next;              // Индекс следующего элемента в массиве
-    bool is_used;          // Флаг занятости ячейки
+  char key[MAX_KEY_LEN]; // Ключ элемента (строковый)
+  char value;            // Значение элемента (символ)
+  int next;              // Индекс следующего элемента в массиве
+  bool is_used;          // Флаг занятости ячейки
 } Node;
 
-// Абстрактный тип данных: Однонаправленный кольцевой список на статическом массиве
+// Абстрактный тип данных: Однонаправленный кольцевой список на статическом
 typedef struct {
-    Node nodes[LIST_CAPACITY]; // Статический пул ячеек памяти
-    int head;                  // Индекс первого элемента списка (NIL если пуст)
-    int free_head;             // Индекс головы списка свободных ячеек
-    int count;                 // Текущее количество элементов в списке
+  Node nodes[LIST_CAPACITY]; // Статический пул ячеек памяти
+  int head;                  // Индекс первого элемента списка (NIL если пуст)
+  int free_head;             // Индекс головы списка свободных ячеек
+  int count;                 // Текущее количество элементов в списке
 } CircularList;
-
-// --- Базовые операции АТД ---
 
 // Создание (инициализация) пустого объекта
 void list_init(CircularList *list);
@@ -45,7 +43,8 @@ bool list_push_back(CircularList *list, const char *key, char value);
 bool list_push_front(CircularList *list, const char *key, char value);
 
 // Вставка элемента после узла с заданным индексом
-bool list_insert_after_index(CircularList *list, int prev_idx, const char *key, char value);
+bool list_insert_after_index(CircularList *list, int prev_idx, const char *key,
+                             char value);
 
 // Удаление элемента по ключу
 bool list_remove_by_key(CircularList *list, const char *key);

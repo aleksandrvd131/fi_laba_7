@@ -36,7 +36,7 @@ asan: LDFLAGS += -fsanitize=address,undefined
 asan: clean all
 	./test_list
 
-# Проверка через Valgrind (если установлен glibc debuginfo)
+# Проверка через Valgrind
 valgrind: test_list
 	valgrind --leak-check=full --error-exitcode=1 ./test_list
 
